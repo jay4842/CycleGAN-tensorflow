@@ -86,22 +86,19 @@ class cyclegan(object):
         self.da_loss = (self.da_loss_real + self.da_loss_fake) / 2
         self.d_loss = self.da_loss + self.db_loss
 
-        self.g_loss_a2b_sum = tf.summary.scalar("g_loss_a2b", self.g_loss_a2b)
-        self.g_loss_b2a_sum = tf.summary.scalar("g_loss_b2a", self.g_loss_b2a)
-        self.g_loss_sum = tf.summary.scalar("g_loss", self.g_loss)
-        self.g_sum = tf.summary.merge([self.g_loss_a2b_sum, self.g_loss_b2a_sum, self.g_loss_sum])
-        self.db_loss_sum = tf.summary.scalar("db_loss", self.db_loss)
-        self.da_loss_sum = tf.summary.scalar("da_loss", self.da_loss)
-        self.d_loss_sum = tf.summary.scalar("d_loss", self.d_loss)
-        self.db_loss_real_sum = tf.summary.scalar("db_loss_real", self.db_loss_real)
-        self.db_loss_fake_sum = tf.summary.scalar("db_loss_fake", self.db_loss_fake)
-        self.da_loss_real_sum = tf.summary.scalar("da_loss_real", self.da_loss_real)
-        self.da_loss_fake_sum = tf.summary.scalar("da_loss_fake", self.da_loss_fake)
-        self.d_sum = tf.summary.merge(
-            [self.da_loss_sum, self.da_loss_real_sum, self.da_loss_fake_sum,
-             self.db_loss_sum, self.db_loss_real_sum, self.db_loss_fake_sum,
-             self.d_loss_sum]
-        )
+        with tf.varible_scope('losses'):
+         self.g_loss_a2b_sum = tf.summary.scalar("g_loss_a2b", self.g_loss_a2b)
+         self.g_loss_b2a_sum = tf.summary.scalar("g_loss_b2a", self.g_loss_b2a)
+         self.g_loss_sum = tf.summary.scalar("g_loss", self.g_loss)
+         self.g_sum = tf.summary.merge([self.g_loss_a2b_sum, self.g_loss_b2a_sum, self.g_loss_sum])
+         self.db_loss_sum = tf.summary.scalar("db_loss", self.db_loss)
+         self.da_loss_sum = tf.summary.scalar("da_loss", self.da_loss)
+         self.d_loss_sum = tf.summary.scalar("d_loss", self.d_loss)
+         self.db_loss_real_sum = tf.summary.scalar("db_loss_real", self.db_loss_real)
+         self.db_loss_fake_sum = tf.summary.scalar("db_loss_fake", self.db_loss_fake)
+         self.da_loss_real_sum = tf.summary.scalar("da_loss_real", self.da_loss_real)
+         self.da_loss_fake_sum = tf.summary.scalar("da_loss_fake", self.da_loss_fake)
+         
 
         self.test_A = tf.placeholder(tf.float32,
                                      [None, self.image_size, self.image_size,
@@ -114,7 +111,7 @@ class cyclegan(object):
 
         tf.summary.image('testB', self.testB)
         tf.summary.image('testA', self.testA)
-        
+        self.d_sum = tf.summary.merg_all()
         t_vars = tf.trainable_variables()
         self.d_vars = [var for var in t_vars if 'discriminator' in var.name]
         self.g_vars = [var for var in t_vars if 'generator' in var.name]
