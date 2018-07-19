@@ -86,7 +86,7 @@ class cyclegan(object):
         self.da_loss = (self.da_loss_real + self.da_loss_fake) / 2
         self.d_loss = self.da_loss + self.db_loss
 
-        with tf.varible_scope('losses'):
+        with tf.variable_scope('losses'):
          self.g_loss_a2b_sum = tf.summary.scalar("g_loss_a2b", self.g_loss_a2b)
          self.g_loss_b2a_sum = tf.summary.scalar("g_loss_b2a", self.g_loss_b2a)
          self.g_loss_sum = tf.summary.scalar("g_loss", self.g_loss)
