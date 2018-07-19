@@ -111,7 +111,7 @@ class cyclegan(object):
 
         tf.summary.image('testB', self.testB)
         tf.summary.image('testA', self.testA)
-        self.d_sum = tf.summary.merg_all()
+        self.d_sum = tf.summary.merge_all()
         t_vars = tf.trainable_variables()
         self.d_vars = [var for var in t_vars if 'discriminator' in var.name]
         self.g_vars = [var for var in t_vars if 'generator' in var.name]
