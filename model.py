@@ -109,8 +109,10 @@ class cyclegan(object):
         self.testB = self.generator(self.test_A, self.options, True, name="generatorA2B")
         self.testA = self.generator(self.test_B, self.options, True, name="generatorB2A")
 
-        tf.summary.image('testB', self.testB)
-        tf.summary.image('testA', self.testA)
+        tf.summary.image('real_A', self.real_A)
+        tf.summary.image('real_B', self.real_B)
+        tf.summary.image('fake_B_sample', self.fake_B_sample)
+        tf.summary.image('fake_A_sample', self.fake_A_sample)
         self.d_sum = tf.summary.merge_all()
         t_vars = tf.trainable_variables()
         self.d_vars = [var for var in t_vars if 'discriminator' in var.name]
