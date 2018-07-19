@@ -112,6 +112,9 @@ class cyclegan(object):
         self.testB = self.generator(self.test_A, self.options, True, name="generatorA2B")
         self.testA = self.generator(self.test_B, self.options, True, name="generatorB2A")
 
+        tf.summary.image('testB', self.testB)
+        tf.summary.image('testA', self.testA)
+        
         t_vars = tf.trainable_variables()
         self.d_vars = [var for var in t_vars if 'discriminator' in var.name]
         self.g_vars = [var for var in t_vars if 'generator' in var.name]
