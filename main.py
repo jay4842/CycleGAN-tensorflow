@@ -3,6 +3,7 @@ import os
 import tensorflow as tf
 tf.set_random_seed(19)
 from model import cyclegan
+from downloader import download_dataset
 
 parser = argparse.ArgumentParser(description='')
 parser.add_argument('--dataset_dir', dest='dataset_dir', default='horse2zebra', help='path of the dataset')
@@ -30,11 +31,15 @@ parser.add_argument('--L1_lambda', dest='L1_lambda', type=float, default=10.0, h
 parser.add_argument('--use_resnet', dest='use_resnet', type=bool, default=True, help='generation network using reidule block')
 parser.add_argument('--use_lsgan', dest='use_lsgan', type=bool, default=True, help='gan loss defined in lsgan')
 parser.add_argument('--max_size', dest='max_size', type=int, default=50, help='max size of image pool, 0 means do not use image pool')
-
+parser.add_argument('--tensorboard_logs', dest='tensorboard_logs',default='./logs', help='Set where we save your tensorboard files to')
 args = parser.parse_args()
 
 
 def main(_):
+    if(not os.path.exists('datasets/{}'.format(args.dataset_dir))):
+        # download it
+        download_dataset(data_set=args.dataset_dir)
+
     if not os.path.exists(args.checkpoint_dir):
         os.makedirs(args.checkpoint_dir)
     if not os.path.exists(args.sample_dir):
