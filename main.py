@@ -36,9 +36,9 @@ args = parser.parse_args()
 
 
 def main(_):
-    if(not os.path.exists('datasets/{}'.format(args.dataset_dir))):
+    #if(not os.path.exists('/data1/ICE_DATA/{}'.format(args.dataset_dir))):
         # download it
-        download_dataset(data_set=args.dataset_dir)
+    #    download_dataset(data_set=args.dataset_dir)
 
     if not os.path.exists(args.checkpoint_dir):
         os.makedirs(args.checkpoint_dir)
