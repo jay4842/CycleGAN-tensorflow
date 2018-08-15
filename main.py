@@ -47,7 +47,7 @@ def main(_):
     if not os.path.exists(args.test_dir):
         os.makedirs(args.test_dir)
 
-    with tf.device('/gpu:1'):
+    with tf.device('/device:GPU:1'):
         tfconfig = tf.ConfigProto(allow_soft_placement=True)
         tfconfig.gpu_options.allow_growth = True
         with tf.Session(config=tfconfig) as sess:
