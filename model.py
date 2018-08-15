@@ -218,10 +218,10 @@ class cyclegan(object):
         np.random.shuffle(dataA)
         np.random.shuffle(dataB)
         batch_files = list(zip(dataA[:self.batch_size], dataB[:self.batch_size]))
-        if(self.dataset_dir == 'ice'):
-            sample_images = [load_train_data_ice(batch_file, is_testing=True) for batch_file in batch_files]
-        else:
-            sample_images = [load_train_data(batch_file, is_testing=True) for batch_file in batch_files]
+        #if(self.dataset_dir == 'ice'):
+        sample_images = [load_train_data_ice(batch_file, is_testing=True) for batch_file in batch_files]
+        #else:
+            #sample_images = [load_train_data(batch_file, is_testing=True) for batch_file in batch_files]
         sample_images = np.array(sample_images).astype(np.float32)
 
         fake_A, fake_B = self.sess.run(
