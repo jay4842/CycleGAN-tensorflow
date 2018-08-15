@@ -47,10 +47,10 @@ def main(_):
     if not os.path.exists(args.test_dir):
         os.makedirs(args.test_dir)
 
-    with tf.device('/device:GPU:1'):
-        tfconfig = tf.ConfigProto(allow_soft_placement=False)
-        tfconfig.gpu_options.allow_growth = True
-        with tf.Session(config=tfconfig) as sess:
+    tfconfig = tf.ConfigProto(allow_soft_placement=False)
+    tfconfig.gpu_options.allow_growth = True
+    with tf.Session(config=tfconfig) as sess:
+        with tf.device('/device:GPU:1'):
             model = cyclegan(sess, args)
             model.train(args) if args.phase == 'train' \
                 else model.test(args)
