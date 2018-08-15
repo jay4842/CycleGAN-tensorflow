@@ -15,9 +15,9 @@ class cyclegan(object):
         self.sess = sess
         self.batch_size = args.batch_size
         self.image_size = args.fine_size
-        self.size_mul = 1
-        if(args.dataset_dir == 'ice'):
-            self.size_mul = 2
+        self.size_mul = 2
+        #if(args.dataset_dir == 'ice'):
+            #self.size_mul = 2
         self.input_c_dim = args.input_nc
         self.output_c_dim = args.output_nc
         self.L1_lambda = args.L1_lambda
